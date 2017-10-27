@@ -1,0 +1,42 @@
+1. ismember:  predicate matches with any object present in the list. 
+If the element is not present in the list then it holds false. 
+ 
+2. satisfied: checks of all goals are already satsified in current state.
+In short it checks whether right list is sublist of left list.
+
+3. ispossible: just does sanity check so that any block is not 
+tried to be stacked/unstacked on itself. 
+
+4. remove(A,B,C): removes list B from list A and stores in list C.
+
+5. applyaction(CurState,NewCurState,Del,Add): removes the Del list from current state list,
+adds the Add list to current state list and store in NewCurState.
+
+6. assign_X: predicates are helper predicates for give_oprn,
+It helps in matching relevant action for a given goal.
+
+7. give_oprn: predicate helps in selecting relevant operation based on 
+currentstate and goal to be achieved. We have used various heuristics here. 
+
+8. giveplan: predicate tries to achieve all the goals and returns a plan to achieve all the goals.
+it's kind of main predicate which are using all other predicates to achieve goal.
+
+It checks if all goals are already satisfied and if not, it finds a goal which is not satisfied,
+and tries to satisfy it by finding relevent operation, and in order to do that operation, it 
+then tries to satisfy it's preconditions and so on. 
+
+9. subsequence(A,B):  checks if A is a continuous subsequence of B, 
+given size of A is two. It's helper function for repair_plan.
+
+10. try_remove(A,B,C): subtracts A from B if B is subsequence , and stores in C.
+Else it just copies A to C. It's hlper function for repair_plan. 
+
+11. repair_plan_help: tries to remove all do and undo pairs from plan.
+
+12. decide_further: decides if we need to try repairing the plan again.
+If in previous try, there is no change then we need not try again.
+
+13. repair_plan: repairs PlanList and stores in NewList. 
+It gets a plan in Temp1 using repair_plan_help and checks if we need repair_further.
+
+14. start_function: gets a TempPLan from giveplan and then calls repair_plan on it.

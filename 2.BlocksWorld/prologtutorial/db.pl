@@ -1,0 +1,2 @@
+loves(romeo,juliet).
+
